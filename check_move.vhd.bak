@@ -1,0 +1,33 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity check_move is
+	port( result : out std_logic;
+		 timing : in std_logic;
+		 play : in std_logic_vector(3 downto 0);
+		 move : in std_logic_vector(3 downto 0));
+end check_move;
+
+architecture behave1 of check_move is
+begin
+
+	process (timing)
+	begin
+		if(rising_edge(timing)) then
+			if (move = play) then
+				result <= '1';
+			else
+				result <= '0';
+			end if;
+		end if;
+	end process;
+	
+end behave1;
+
+architecture behave2 of check_move is
+begin
+
+	result <= std_logic((play(0) and move(0)) and (play(1) and move(1)) and (play(2) and move(2)) and (play(3) and move(3)));
+
+end behave2;

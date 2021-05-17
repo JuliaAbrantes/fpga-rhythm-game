@@ -1,0 +1,46 @@
+
+inputs:
+count_max
+timer_out
+start_button
+
+outputs:
+acctualy_playing
+animation_won
+animation_lost
+
+states:
+PLAYING
+acctualy_playing = 1
+animation_won = 0
+animation_lost = 0
+show_level = 1
+show_counter = 1
+
+LOST_GAME
+acctualy_playing = 0
+animation_won = 0
+animation_lost = 1
+show_level = 1
+show_counter = 0
+
+WON_GAME
+acctualy_playing = 0
+animation_won = 1
+animation_lost = 0
+show_level = 1
+show_counter = 0
+
+CHOOSE_LEVEL
+acctualy_playing = 0
+animation_won = 0
+animation_lost = 0
+show_level = 1
+show_counter = 0
+
+transitions:
+PLAYING/count_max => WON_GAME
+PLAYING/miss_one => LOST_GAME
+LOST_GAME/timer_out => CHOOSE_LEVEL
+WON_GAME/timer_out => CHOOSE_LEVEL
+CHOOSE_LEVEL/start_button => PLAYING
